@@ -1,0 +1,153 @@
+﻿namespace TruckApi.DataAccess
+{
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Web;
+    using TruckApi.Core;
+    using TruckApi.Models;
+    public class CommissionAccess
+    {
+        public List<Dictionary<string, object>> GetAllCommission()
+        {
+            return DbAccess.DbASelect("SELECT * FROM commissionbill");
+        }
+        public List<Dictionary<string, object>> GetCommissionBySearch(Commission objCommission)
+        {
+            return DbAccess.DbASelect("SELECT * FROM commission where commissionid='" + objCommission.commissionid + "'");
+        }
+
+        public string AddCommission(Commission objAddCommission)
+        {
+            return DbAccess.DbAInsert("insert into commission VALUES ('NULL', '" + objAddCommission.paymentmode
+            + "', '" + objAddCommission.balance
+            + "', '" + objAddCommission.advance
+            + "', '" + objAddCommission.commitionpercent
+            + "', '" + objAddCommission.commitionbalance
+            + "', '" + objAddCommission.tmamul
+            + "', '" + objAddCommission.assignid
+            + "', '" + objAddCommission.driverid
+            + "')");
+        }
+
+        public string EditCommission(Commission objEditCommission)
+        {
+            return DbAccess.DbAInsert("UPDATE commission SET "
+            + "paymentmode='" + objEditCommission.paymentmode + "',"
+            + "balance='" + objEditCommission.balance + "',"
+            + "advance='" + objEditCommission.advance + "',"
+            + "commitionpercent='" + objEditCommission.commitionpercent + "',"
+            + "commitionbalance='" + objEditCommission.commitionbalance + "',"
+            + "tmamul='" + objEditCommission.tmamul + "',"
+            + "assignid='" + objEditCommission.assignid + "',"
+            + "driverid='" + objEditCommission.driverid + "' WHERE commissionid=" + objEditCommission.commissionid + "");
+        }
+
+        ////#region "get"
+        ////public List<Dictionary<string, object>> GetAllCommission()
+        ////{
+        ////    return DbAccess.DbASelect("SELECT * FROM commissionbill");
+        ////}
+
+        ////public List<Dictionary<string, object>> GetCommissionBySearch(Commission objCommission)
+        ////{
+        ////    if (objCommission != null)
+        ////    {
+        ////        if (objCommission.commissionid != 0)
+        ////        {
+        ////            return DbAccess.DbASelect("SELECT * FROM commissionbill where commissionid='" + objCommission.commissionid + "'");
+        ////        }
+        ////        else if (objCommission.assignid != 0)
+        ////        {
+        ////            return DbAccess.DbASelect("SELECT * FROM commissionbill where assignid='" + objCommission.assignid + "'");
+        ////        }
+        ////        else if (objCommission.userid != 0)
+        ////        {
+        ////            return DbAccess.DbASelect("SELECT * FROM commissionbill where userid='" + objCommission.userid + "'");
+        ////        }
+        ////        else if (objCommission.loadadvance != 0)
+        ////        {
+        ////            return DbAccess.DbASelect("SELECT * FROM commissionbill where loadadvance='" + objCommission.loadadvance + "'");
+        ////        }
+        ////        else if (objCommission.loadbalance != 0)
+        ////        {
+        ////            return DbAccess.DbASelect("SELECT * FROM commissionbill where loadbalance='" + +objCommission.loadbalance + "'");
+        ////        }
+        ////        else if (objCommission.commissionstatus != 0)
+        ////        {
+        ////            return DbAccess.DbASelect("SELECT * FROM commissionbill where commissionstatus= '" + objCommission.commissionstatus + "'");
+        ////        }
+        ////        else if (objCommission.mamulstatus != 0)
+        ////        {
+        ////            return DbAccess.DbASelect("SELECT * FROM commissionbill where mamulstatus= '" + objCommission.mamulstatus + "'");
+        ////        }
+        ////        else if (objCommission.islive != 0)
+        ////        {
+        ////            return DbAccess.DbASelect("SELECT * FROM commissionbill where islive= '" + objCommission.islive + "'");
+        ////        }
+        ////        else if (objCommission.status != 0)
+        ////        {
+        ////            return DbAccess.DbASelect("SELECT * FROM commissionbill where status= '" + objCommission.status + "'");
+        ////        }
+        ////        else if (objCommission.addeddate != null)
+        ////        {
+        ////            return DbAccess.DbASelect("SELECT * FROM commissionbill where addeddate LIKE '%" + objCommission.addeddate + "%'");
+        ////        }
+        ////        else
+        ////        {
+        ////            throw new NotImplementedException("no data");
+        ////        }
+        ////    }
+        ////    else
+        ////    {
+        ////        throw new NotImplementedException("no data");
+        ////    }
+        ////}
+        ////#endregion
+
+        ////#region "post"
+        ////public string AddCommission(Commission objAddCommission)
+        ////{
+        ////    return DbAccess.DbAInsert("insert into commissionbill VALUES ('NULL', '" + objAddCommission.assignid
+        ////    + "', '" + objAddCommission.userid
+        ////    + "', '" + objAddCommission.loadadvance
+        ////    + "', '" + objAddCommission.loadbalance
+        ////    + "', '" + objAddCommission.commissionstatus
+        ////    + "', '" + objAddCommission.commissionamount
+        ////    + "', '" + objAddCommission.commissionpayed
+        ////    + "', '" + objAddCommission.commissionbalance
+        ////    + "', '" + objAddCommission.mamulstatus
+        ////    + "', '" + objAddCommission.mamulamount
+        ////    + "', '" + objAddCommission.mamulpayed
+        ////    + "', '" + objAddCommission.mamulbalance
+        ////    + "', '" + objAddCommission.addeddate
+        ////    + "', '" + objAddCommission.status
+        ////    + "', '1')");
+        ////}
+
+        ////public string EditCommission(Commission objEditCommission)
+        ////{
+        ////    return DbAccess.DbAInsert("UPDATE commissionbill SET "
+        ////    + "assignid='" + objEditCommission.assignid + "',"
+        ////    + "userid='" + objEditCommission.userid + "',"
+        ////    + "loadbalance='" + objEditCommission.loadbalance + "',"
+        ////    + "commissionstatus='" + objEditCommission.commissionstatus + "',"
+        ////    + "commissionamount='" + objEditCommission.commissionamount + "',"
+        ////    + "commissionpayed='" + objEditCommission.commissionpayed + "',"
+        ////    + "commissionbalance='" + objEditCommission.commissionbalance + "',"
+        ////    + "commissionstatus='" + objEditCommission.mamulstatus + "',"
+        ////    + "commissionamount='" + objEditCommission.mamulamount + "',"
+        ////    + "commissionpayed='" + objEditCommission.mamulpayed + "',"
+        ////    + "commissionbalance='" + objEditCommission.mamulbalance + "',"
+        ////    + "addeddate='" + objEditCommission.addeddate + "',"
+        ////    + "status='" + objEditCommission.status + "',"
+        ////    + "islive='1' WHERE commissionid=" + objEditCommission.commissionid + "");
+        ////}
+
+        ////public string DeleteUser(int CommissionNumber)
+        ////{
+        ////    return DbAccess.DbAInsert("UPDATE commissionbill SET islive='2' WHERE commissionid='" + CommissionNumber + "'");
+        ////}
+        ////#endregion
+    }
+}
