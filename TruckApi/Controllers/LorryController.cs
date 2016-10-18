@@ -44,12 +44,40 @@
         }
 
         [HttpGet]
+        [ActionName("getnotes")]
+        public HttpResponseMessage GetNotes(string year, string month)
+        {
+            if (this.objSdminUserValidation.ValidateUserName(Request))
+            {
+                return Request.CreateResponse(HttpStatusCode.OK, objLorryAccess.GetNotes(year,month));
+            }
+            else
+            {
+                return Request.CreateResponse(HttpStatusCode.Unauthorized);
+            }
+        }
+
+        [HttpGet]
         [ActionName("getallloadnotes")]
         public HttpResponseMessage GetAllLoadNotes()
         {
             if (this.objSdminUserValidation.ValidateUserName(Request))
             {
                 return Request.CreateResponse(HttpStatusCode.OK, objLorryAccess.GetAllLoadNotes());
+            }
+            else
+            {
+                return Request.CreateResponse(HttpStatusCode.Unauthorized);
+            }
+        }
+
+        [HttpGet]
+        [ActionName("getloadnotes")]
+        public HttpResponseMessage GetLoadNotes(string year, string month)
+        {
+            if (this.objSdminUserValidation.ValidateUserName(Request))
+            {
+                return Request.CreateResponse(HttpStatusCode.OK, objLorryAccess.GetLoadNotes(year,month));
             }
             else
             {

@@ -24,6 +24,16 @@
             return DbAccess.DbASelect("SELECT * FROM loadnote");
         }
 
+        public List<Dictionary<string, object>> GetNotes(string year, string month)
+        {
+            return DbAccess.DbASelect("SELECT * FROM notes WHERE YEAR(STR_TO_DATE(addeddate, '%d/%m/%Y')) = " + year + " MONTH(STR_TO_DATE(addeddate, '%d/%m/%Y')) = "+month);
+        }
+
+        public List<Dictionary<string, object>> GetLoadNotes(string year, string month)
+        {
+            return DbAccess.DbASelect("SELECT * FROM loadnote WHERE YEAR(STR_TO_DATE(addeddate, '%d/%m/%Y')) = " + year + " MONTH(STR_TO_DATE(addeddate, '%d/%m/%Y')) = " + month);
+        }
+
         public List<Dictionary<string, object>> GetAllTodayNotes()
         {
             string today = DateTime.Now.ToString("dd/MM/yyyy");
