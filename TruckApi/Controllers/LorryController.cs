@@ -87,11 +87,11 @@
 
         [HttpGet]
         [ActionName("getalltodaynotes")]
-        public HttpResponseMessage GetAllTodayNotes()
+        public HttpResponseMessage GetAllTodayNotes(string today)
         {
             if (this.objSdminUserValidation.ValidateUserName(Request))
             {
-                return Request.CreateResponse(HttpStatusCode.OK, objLorryAccess.GetAllTodayNotes());
+                return Request.CreateResponse(HttpStatusCode.OK, objLorryAccess.GetAllTodayNotes(today));
             }
             else
             {
@@ -101,11 +101,11 @@
 
         [HttpGet]
         [ActionName("getalltodayloadnotes")]
-        public HttpResponseMessage GetAllTodayLoadNotes()
+        public HttpResponseMessage GetAllTodayLoadNotes(string today)
         {
             if (this.objSdminUserValidation.ValidateUserName(Request))
             {
-                return Request.CreateResponse(HttpStatusCode.OK, objLorryAccess.GetAllTodayLoadNotes());
+                return Request.CreateResponse(HttpStatusCode.OK, objLorryAccess.GetAllTodayLoadNotes(today));
             }
             else
             {

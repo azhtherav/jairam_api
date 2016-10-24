@@ -26,30 +26,30 @@
 
         public List<Dictionary<string, object>> GetNotes(string year, string month)
         {
-            return DbAccess.DbASelect("SELECT * FROM notes WHERE YEAR(STR_TO_DATE(addeddate, '%d/%m/%Y')) = " + year + " MONTH(STR_TO_DATE(addeddate, '%d/%m/%Y')) = "+month);
+            return DbAccess.DbASelect("SELECT * FROM notes WHERE YEAR(STR_TO_DATE(addeddate, '%d/%m/%Y')) = " + year + " and MONTH(STR_TO_DATE(addeddate, '%d/%m/%Y')) = "+month);
         }
 
         public List<Dictionary<string, object>> GetLoadNotes(string year, string month)
         {
-            return DbAccess.DbASelect("SELECT * FROM loadnote WHERE YEAR(STR_TO_DATE(addeddate, '%d/%m/%Y')) = " + year + " MONTH(STR_TO_DATE(addeddate, '%d/%m/%Y')) = " + month);
+            return DbAccess.DbASelect("SELECT * FROM loadnote WHERE YEAR(STR_TO_DATE(addeddate, '%d/%m/%Y')) = " + year + " and MONTH(STR_TO_DATE(addeddate, '%d/%m/%Y')) = " + month);
         }
 
-        public List<Dictionary<string, object>> GetAllTodayNotes()
+        public List<Dictionary<string, object>> GetAllTodayNotes(string today)
         {
-            string today = DateTime.Now.ToString("dd/MM/yyyy");
+            //string today = DateTime.Now.ToString("dd/MM/yyyy");
             
-            if (today.Contains("-"))
-                today = today.Replace("-", "/");
+            //if (today.Contains("-"))
+            //    today = today.Replace("-", "/");
             
             return DbAccess.DbASelect("SELECT * FROM notes where addeddate='" + today + "'");
         }
 
-        public List<Dictionary<string, object>> GetAllTodayLoadNotes()
+        public List<Dictionary<string, object>> GetAllTodayLoadNotes(string today)
         {
-            string today = DateTime.Now.ToString("dd/MM/yyyy");
+            //string today = DateTime.Now.ToString("dd/MM/yyyy");
             
-            if (today.Contains("-"))
-                today = today.Replace("-", "/");
+            //if (today.Contains("-"))
+            //    today = today.Replace("-", "/");
 
             return DbAccess.DbASelect("SELECT * FROM loadnote where addeddate='" + today +"'");
         }
