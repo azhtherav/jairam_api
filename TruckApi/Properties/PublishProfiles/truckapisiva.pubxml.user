@@ -178,7 +178,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>10/03/2015 06:30:46</publishTime>
     </File>
     <File Include="bin/TruckApi.dll">
-      <publishTime>01/21/2016 09:08:03</publishTime>
+      <publishTime>10/25/2016 08:21:23</publishTime>
     </File>
     <File Include="bin/TruckApi.dll.config">
       <publishTime>10/03/2015 06:30:46</publishTime>
@@ -478,7 +478,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>10/03/2015 06:30:46</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>01/05/2016 10:10:19</publishTime>
+      <publishTime>10/25/2016 08:21:24</publishTime>
     </File>
   </ItemGroup>
 </Project>
