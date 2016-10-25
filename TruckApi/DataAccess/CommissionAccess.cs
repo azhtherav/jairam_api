@@ -46,7 +46,7 @@
             if (today.Contains("-"))
                 today = today.Replace("-", "/");
 
-            return DbAccess.DbASelect("SELECT * FROM  comision WHERE DATEDIFF(DATE_FORMAT(STR_TO_DATE('"+today+"', '%d/%m/%Y'), '%Y-%m-%d'), DATE_FORMAT(STR_TO_DATE(loadingdate, '%d/%m/%Y'), '%Y-%m-%d'))>10 and ackdate=''");
+            return DbAccess.DbASelect("SELECT * FROM  comision WHERE paymentmode='advance' and DATEDIFF(DATE_FORMAT(STR_TO_DATE('" + today + "', '%d/%m/%Y'), '%Y-%m-%d'), DATE_FORMAT(STR_TO_DATE(loadingdate, '%d/%m/%Y'), '%Y-%m-%d'))>10 and ackdate=''");
         }
 
         public List<Dictionary<string, object>> GetBalanceReceivedDateCommission()
@@ -56,23 +56,42 @@
             if (today.Contains("-"))
                 today = today.Replace("-", "/");
 
-            return DbAccess.DbASelect("SELECT * FROM  comision WHERE DATEDIFF(DATE_FORMAT(STR_TO_DATE('" + today + "', '%d/%m/%Y'), '%Y-%m-%d'), DATE_FORMAT(STR_TO_DATE(ackdate, '%d/%m/%Y'), '%Y-%m-%d'))>2 and amountsentdate=''");
+            return DbAccess.DbASelect("SELECT * FROM  comision WHERE paymentmode='advance' and DATEDIFF(DATE_FORMAT(STR_TO_DATE('" + today + "', '%d/%m/%Y'), '%Y-%m-%d'), DATE_FORMAT(STR_TO_DATE(ackdate, '%d/%m/%Y'), '%Y-%m-%d'))>2 and amountsentdate=''");
         }
 
         public List<Dictionary<string, object>> GetBalanceErrorCommission()
         {
-            return DbAccess.DbASelect("SELECT * FROM  comision WHERE balanceerrorchecking < 0");
+            return DbAccess.DbASelect("SELECT * FROM  comision WHERE paymentmode='advance' and balanceerrorchecking < 0");
         }
 
         public List<Dictionary<string, object>> GetAllOpenCommission()
         {
-            string today = DateTime.Now.ToString("dd/MM/yyyy");
-                        
-            if(today.Contains("-"))
-                today = today.Replace("-", "/");
+           return DbAccess.DbASelect("SELECT * FROM  comision WHERE commitionstatus = 'open'");
+        }
 
-            return DbAccess.DbASelect("SELECT * FROM  comision WHERE DATEDIFF(DATE_FORMAT(STR_TO_DATE('" + today + "', '%d/%m/%Y'), '%Y-%m-%d'), DATE_FORMAT(STR_TO_DATE(loadingdate, '%d/%m/%Y'), '%Y-%m-%d'))>13 and commitionstatus = 'open'");
-            //return DbAccess.DbASelect("SELECT * FROM  comision WHERE commitionstatus = 'open'");
+        public List<Dictionary<string, object>> GetCommissionBalance()
+        {
+            return DbAccess.DbASelect("select * from comision where commitionbalance>0");
+        }
+
+        public List<Dictionary<string, object>> GetAllOpenToopayCommission()
+        {
+            return DbAccess.DbASelect("SELECT * FROM  comision WHERE commitionstatus = 'open' and paymentmode='too pay'");
+        }
+
+        public List<Dictionary<string, object>> GetAllOpenAdvanceCommission()
+        {
+            return DbAccess.DbASelect("SELECT * FROM  comision WHERE commitionstatus = 'open' and paymentmode='advance' and ackdate!='' and balancereceiveddate!='' and amountsentdate!=''");
+        }
+
+        public List<Dictionary<string, object>> GetInflowCommission()
+        {
+            return DbAccess.DbASelect("select * from comision where paymentmode='advance' and ackdate!='' and balancereceiveddate=''");
+        }
+
+        public List<Dictionary<string, object>> GetOutflowCommission()
+        {
+            return DbAccess.DbASelect("select * from comision where paymentmode='advance' and ackdate!='' and balancereceiveddate!='' and amountsentdate=''");
         }
 
         public string AddCommission(Commission objAddCommission)

@@ -186,6 +186,77 @@
         }
 
 
+        [HttpGet]
+        [ActionName("getinflowcommission")]
+        public HttpResponseMessage GetInflowCommission()
+        {
+            if (this.objSdminUserValidation.ValidateUserName(Request))
+            {
+                return Request.CreateResponse(HttpStatusCode.OK, objCommissionAccess.GetInflowCommission());
+            }
+            else
+            {
+                return Request.CreateResponse(HttpStatusCode.Unauthorized);
+            }
+        }
+
+        [HttpGet]
+        [ActionName("getoutflowcommission")]
+        public HttpResponseMessage GetOutflowCommission()
+        {
+            if (this.objSdminUserValidation.ValidateUserName(Request))
+            {
+                return Request.CreateResponse(HttpStatusCode.OK, objCommissionAccess.GetOutflowCommission());
+            }
+            else
+            {
+                return Request.CreateResponse(HttpStatusCode.Unauthorized);
+            }
+        }
+
+        [HttpGet]
+        [ActionName("getcommissionbalance")]
+        public HttpResponseMessage GetCommissionBalance()
+        {
+            if (this.objSdminUserValidation.ValidateUserName(Request))
+            {
+                return Request.CreateResponse(HttpStatusCode.OK, objCommissionAccess.GetCommissionBalance());
+            }
+            else
+            {
+                return Request.CreateResponse(HttpStatusCode.Unauthorized);
+            }
+        }
+
+        [HttpGet]
+        [ActionName("getallopentoopaycommission")]
+        public HttpResponseMessage GetAllOpenToopayCommission()
+        {
+            if (this.objSdminUserValidation.ValidateUserName(Request))
+            {
+                return Request.CreateResponse(HttpStatusCode.OK, objCommissionAccess.GetAllOpenToopayCommission());
+            }
+            else
+            {
+                return Request.CreateResponse(HttpStatusCode.Unauthorized);
+            }
+        }
+
+        [HttpGet]
+        [ActionName("getallopenadvancecommission")]
+        public HttpResponseMessage GetAllOpenAdvanceCommission()
+        {
+            if (this.objSdminUserValidation.ValidateUserName(Request))
+            {
+                return Request.CreateResponse(HttpStatusCode.OK, objCommissionAccess.GetAllOpenAdvanceCommission());
+            }
+            else
+            {
+                return Request.CreateResponse(HttpStatusCode.Unauthorized);
+            }
+        }
+
+
         //[HttpPost]
         //[ActionName("editcommission")]
         //public HttpResponseMessage EditCommission([FromBody]Commission objCommission)
